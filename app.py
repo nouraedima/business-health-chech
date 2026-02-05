@@ -7,7 +7,7 @@ from data_analyzer import DataAnalyzer
 # Configuration de la page
 st.set_page_config(
     page_title="Business Data Health Check",
-    page_icon="📊",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
@@ -218,12 +218,9 @@ def main():
     # En-tête avec infos créateur
     st.markdown("""
         <div class="creator-header">
-            <div class="main-header">📊 Business Data Health Check</div>
+            <div class="main-header"> Business Data Health Check</div>
             <div class="sub-header">Comprenez vos données business en 5 minutes, sans être expert</div>
-            <div class="creator-name">
-                Créé par <a href="https://www.linkedin.com/in/noura-mboutto-babb1b330" target="_blank">Noura Edima Mboutto</a> | 
-                Étudiante en Développement Web | Data & IA
-            </div>
+        
         </div>
     """, unsafe_allow_html=True)
     
@@ -233,7 +230,7 @@ def main():
     
     # Étape 1: Upload du fichier
     st.markdown("---")
-    st.markdown("### 📁 Étape 1 : Importer vos données")
+    st.markdown(" Étape 1 : Importer vos données de ventes")
     
     col1, col2 = st.columns([2, 1])
     
@@ -245,13 +242,13 @@ def main():
         )
     
     with col2:
-        st.info("**📋 Format attendu :**\n\n✓ date\n\n✓ client_id\n\n✓ montant\n\n✓ statut")
+        st.info("** Format attendu :**\n\n✓ date\n\n✓ client_id\n\n✓ montant\n\n✓ statut")
         
         # Bouton pour télécharger l'exemple
         try:
             with open('exemple_ventes.csv', 'rb') as f:
                 st.download_button(
-                    label="📥 Télécharger un exemple",
+                    label=" Télécharger un exemple",
                     data=f,
                     file_name="exemple_ventes.csv",
                     mime="text/csv",
@@ -273,26 +270,26 @@ def main():
             missing_columns = [col for col in required_columns if col not in df.columns]
             
             if missing_columns:
-                st.error(f"❌ Colonnes manquantes : {', '.join(missing_columns)}")
+                st.error(f" Colonnes manquantes : {', '.join(missing_columns)}")
                 st.stop()
             
-            st.success(f"✅ Fichier chargé avec succès ! **{len(df)} lignes** détectées")
+            st.success(f" Fichier chargé avec succès ! **{len(df)} lignes** détectées")
             
             # Étape 2: Questions de contexte
             st.markdown("---")
-            st.markdown("### 🎯 Étape 2 : Personnalisez votre analyse")
+            st.markdown("Étape 2 : Personnalisez votre analyse")
             
             col1, col2, col3 = st.columns(3)
             
             with col1:
                 activite = st.selectbox(
-                    "🏢 Type d'activité",
+                    "Type d'activité",
                     ["E-commerce", "Service (SaaS, consulting...)", "Autre"]
                 )
             
             with col2:
                 objectif = st.selectbox(
-                    "🎯 Objectif principal",
+                    "Objectif principal",
                     ["Augmenter les ventes", "Fidéliser les clients", "Optimiser la rentabilité"]
                 )
             
@@ -304,14 +301,14 @@ def main():
                 date_max = df_temp['date'].max().strftime('%m/%Y')
                 
                 st.text_input(
-                    "📅 Période analysée",
+                    "Période analysée",
                     value=f"{date_min} - {date_max}",
                     disabled=True
                 )
             
             # Bouton d'analyse
             st.markdown("---")
-            if st.button("🚀 Analyser mes données", type="primary", use_container_width=True):
+            if st.button(" Analyser mes données", type="primary", use_container_width=True):
                 st.session_state.analyzed = True
                 st.session_state.df = df
                 st.session_state.activite = activite
@@ -323,15 +320,15 @@ def main():
                 show_results(st.session_state.df, st.session_state.activite, st.session_state.objectif)
                 
         except Exception as e:
-            st.error(f"❌ Erreur lors du chargement du fichier : {str(e)}")
+            st.error(f" Erreur lors du chargement du fichier : {str(e)}")
     
     else:
         # Message d'accueil si pas de fichier
         st.markdown("---")
-        st.info("👆 **Commencez par importer un fichier CSV ou Excel pour démarrer l'analyse**")
+        st.info(" **Commencez par importer un fichier CSV ou Excel pour démarrer l'analyse**")
         
         # Exemple de données attendues
-        with st.expander("💡 Voir un exemple de structure de données attendue"):
+        with st.expander(" Voir un exemple de structure de données attendue"):
             st.code("""
 date,client_id,montant,statut
 2024-01-15,C001,120.50,complete
@@ -342,14 +339,14 @@ date,client_id,montant,statut
     # Footer
     st.markdown("""
         <div class="footer">
-            <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">💼 Vous recrutez un Data Analyst ?</p>
+            <p style="font-size: 1.2rem; margin-bottom: 0.5rem;"> N'hesitez pas à me contacter si vous avez des questions !</p>
             <p style="font-size: 1rem;">
                 Je suis <a href="https://www.linkedin.com/in/noura-mboutto-babb1b330" target="_blank">Noura Edima Mboutto</a>, 
                 étudiante en Développement Web | Data & IA,<br>
-                actuellement à la recherche d'une <strong>alternance en Data Analyst</strong>.
+            <strong>Developpé avec amour.</strong>.
             </p>
             <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.9;">
-                📧 Contactez-moi via <a href="https://www.linkedin.com/in/noura-mboutto-babb1b330" target="_blank">LinkedIn</a>
+                Contactez-moi via <a href="https://www.linkedin.com/in/noura-mboutto-babb1b330" target="_blank">LinkedIn</a>
             </p>
         </div>
     """, unsafe_allow_html=True)
@@ -358,10 +355,10 @@ def show_results(df, activite, objectif):
     """Affiche les résultats de l'analyse"""
     
     st.markdown("---")
-    st.markdown("## 📊 Résultats de votre analyse")
+    st.markdown("  Résultats de votre analyse")
     
     # Créer l'analyseur
-    with st.spinner("🔍 Analyse en cours..."):
+    with st.spinner(" Analyse en cours..."):
         analyzer = DataAnalyzer(df)
         kpis = analyzer.get_kpis()
         alerts = analyzer.detect_alerts(kpis)
@@ -369,7 +366,7 @@ def show_results(df, activite, objectif):
         score, statut = analyzer.get_health_score(kpis)
     
     # Score de santé global
-    st.markdown("### 🎯 Santé Globale de votre Activité")
+    st.markdown(" Santé Globale de votre Activité")
     
     col1, col2, col3 = st.columns([1, 2, 1])
     
@@ -403,39 +400,39 @@ def show_results(df, activite, objectif):
     st.markdown("---")
     
     # Indicateurs clés
-    st.markdown("### 📈 Indicateurs Clés")
+    st.markdown(" Indicateurs Clés")
     
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.metric(
-            label="💰 Chiffre d'Affaires",
+            label="Chiffre d'Affaires",
             value=f"{kpis['ca_total']:,.0f} €",
             delta=f"{kpis['evolution_ca']:.1f}%" if kpis['evolution_ca'] != 0 else None
         )
     
     with col2:
         st.metric(
-            label="🛒 Panier Moyen",
+            label=" Panier Moyen",
             value=f"{kpis['panier_moyen']:.2f} €",
             delta=f"{kpis['evolution_panier']:.1f}%" if kpis['evolution_panier'] != 0 else None
         )
     
     with col3:
         st.metric(
-            label="🔁 Taux de Rétention",
+            label="Taux de Rétention",
             value=f"{kpis['taux_retention']:.0f} %"
         )
     
     with col4:
         st.metric(
-            label="👥 Clients Uniques",
+            label="Clients Uniques",
             value=f"{kpis['nb_clients']}"
         )
     
     # Graphiques
     st.markdown("---")
-    st.markdown("### 📊 Évolution dans le Temps")
+    st.markdown(" Évolution dans le Temps")
     
     col1, col2 = st.columns(2)
     
@@ -449,7 +446,7 @@ def show_results(df, activite, objectif):
             ca_mensuel_df,
             x='Mois',
             y='CA',
-            title='📈 Évolution du Chiffre d\'Affaires Mensuel',
+            title='Évolution du Chiffre d\'Affaires Mensuel',
             markers=True
         )
         fig.update_traces(line_color='#667eea', line_width=3, marker=dict(size=8))
@@ -470,7 +467,7 @@ def show_results(df, activite, objectif):
         fig = px.bar(
             x=achats_par_client.index,
             y=achats_par_client.values,
-            title='👥 Répartition des Clients par Nombre d\'Achats',
+            title=' Répartition des Clients par Nombre d\'Achats',
             labels={'x': 'Nombre d\'achats', 'y': 'Nombre de clients'}
         )
         fig.update_traces(marker_color='#764ba2')
@@ -483,7 +480,7 @@ def show_results(df, activite, objectif):
     
     # Alertes
     st.markdown("---")
-    st.markdown("### 🚨 Alertes et Opportunités")
+    st.markdown("  Alertes et Opportunités")
     
     # Alertes critiques
     if alerts['critiques']:
@@ -516,32 +513,32 @@ def show_results(df, activite, objectif):
             """, unsafe_allow_html=True)
     
     if not alerts['critiques'] and not alerts['warnings'] and not alerts['opportunites']:
-        st.info("✅ Aucune alerte détectée. Votre activité semble stable !")
+        st.info(" Aucune alerte détectée. Votre activité semble stable !")
     
     # Recommandations
     st.markdown("---")
-    st.markdown("### 💡 Recommandations Actionnables")
+    st.markdown("### Recommandations Actionnables")
     
     for i, reco in enumerate(recommendations, 1):
-        priorite_emoji = "🔴" if reco['priorite'] == 'haute' else "🟡" if reco['priorite'] == 'moyenne' else "🟢"
+        priorite_emoji = "" if reco['priorite'] == 'haute' else "" if reco['priorite'] == 'moyenne' else ""
         
         with st.expander(f"{priorite_emoji} {reco['action']}", expanded=(i == 1)):
             st.write(reco['details'])
     
     # Statistiques détaillées
     st.markdown("---")
-    st.markdown("### 📋 Statistiques Détaillées")
+    st.markdown(" Statistiques Détaillées")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("**📊 Métriques générales**")
+        st.markdown("** Métriques générales**")
         st.write(f"• Nombre total de transactions : **{kpis['nb_transactions']}**")
         st.write(f"• Fréquence d'achat moyenne : **{kpis['freq_achat_moyenne']:.2f}**")
         st.write(f"• Concentration du CA (top 20%) : **{kpis['concentration_ca']:.1f}%**")
     
     with col2:
-        st.markdown("**📅 Période d'analyse**")
+        st.markdown("**Période d'analyse**")
         date_min = analyzer.df['date'].min().strftime('%d/%m/%Y')
         date_max = analyzer.df['date'].max().strftime('%d/%m/%Y')
         st.write(f"• Début : **{date_min}**")
@@ -553,15 +550,15 @@ def show_results(df, activite, objectif):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        if st.button("🔄 Nouvelle Analyse", use_container_width=True):
+        if st.button(" Nouvelle Analyse", use_container_width=True):
             st.session_state.analyzed = False
             st.rerun()
     
     with col2:
-        st.button("💾 Télécharger le Rapport PDF", use_container_width=True, disabled=True, help="Fonctionnalité à venir")
+        st.button(" Télécharger le Rapport PDF", use_container_width=True, disabled=True, help="Fonctionnalité à venir")
     
     with col3:
-        st.button("📤 Partager sur LinkedIn", use_container_width=True, disabled=True, help="Fonctionnalité à venir")
+        st.button(" Partager sur LinkedIn", use_container_width=True, disabled=True, help="Fonctionnalité à venir")
 
 if __name__ == "__main__":
     main()

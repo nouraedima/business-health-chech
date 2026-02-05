@@ -108,42 +108,42 @@ class DataAnalyzer:
         # Alerte 1: Baisse du CA
         if kpis['evolution_ca'] < -10:
             alerts['critiques'].append({
-                'titre': '📉 Baisse significative du CA',
+                'titre': ' Baisse significative du CA',
                 'description': f"Le CA a baissé de {abs(kpis['evolution_ca']):.1f}% sur le dernier mois"
             })
         
         # Alerte 2: Baisse du panier moyen
         if kpis['evolution_panier'] < -5:
             alerts['warnings'].append({
-                'titre': '⚠️ Diminution du panier moyen',
+                'titre': ' Diminution du panier moyen',
                 'description': f"Le panier moyen a baissé de {abs(kpis['evolution_panier']):.1f}% sur le dernier mois"
             })
         
         # Alerte 3: Faible taux de rétention
         if kpis['taux_retention'] < 30:
             alerts['warnings'].append({
-                'titre': '⚠️ Taux de rétention faible',
+                'titre': ' Taux de rétention faible',
                 'description': f"Seulement {kpis['taux_retention']:.0f}% de vos clients reviennent acheter"
             })
         
         # Alerte 4: Forte concentration du CA
         if kpis['concentration_ca'] > 70:
             alerts['warnings'].append({
-                'titre': '⚠️ Concentration du CA élevée',
+                'titre': ' Concentration du CA élevée',
                 'description': f"Les 20% meilleurs clients génèrent {kpis['concentration_ca']:.0f}% du CA (risque de dépendance)"
             })
         
         # Opportunité 1: Bonne rétention
         if kpis['taux_retention'] > 50:
             alerts['opportunites'].append({
-                'titre': '💡 Excellente fidélité client',
+                'titre': ' Excellente fidélité client',
                 'description': f"{kpis['taux_retention']:.0f}% de clients fidèles : investir dans un programme de fidélité pourrait maximiser leur valeur"
             })
         
         # Opportunité 2: Croissance du CA
         if kpis['evolution_ca'] > 15:
             alerts['opportunites'].append({
-                'titre': '💡 Forte croissance détectée',
+                'titre': ' Forte croissance détectée',
                 'description': f"CA en hausse de {kpis['evolution_ca']:.1f}% : moment idéal pour accélérer (marketing, stock, équipe)"
             })
         
